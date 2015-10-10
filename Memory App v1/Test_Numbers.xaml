@@ -1,0 +1,222 @@
+﻿<Page
+    x:Class="Memory_App_v1.Test_Numbers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF040D27" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonCaption" Label="Show Answer's Transcript" Icon="Caption"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Back" Label="Test Page" Click="appbarButtonBack_Click"/>
+                <AppBarButton Icon="Home" Label="Main Menu" Click="appbarButtonHome_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+
+
+    <Page.Resources>
+
+        <Storyboard x:Name="stryInstruction">
+            <DoubleAnimation Storyboard.TargetName="tbkInstructions" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1"/>
+        </Storyboard>
+
+        <Style x:Key="style_Answers" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="12,4,12,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="#FF117B85">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="#FF0D6C76" Offset="1"/>
+                                                            <GradientStop Color="#FF0EA8B8" Offset="0"/>
+                                                        </LinearGradientBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Yellow"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF33929B"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FFFDF072"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                            <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF0EA8B8" Offset="0"/>
+            <GradientStop Color="#FFFDF072" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF1720DE" Offset="0"/>
+                <GradientStop Color="#FF090C59" Offset="1"/>
+                <GradientStop Color="#FF11157E" Offset="0.43"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="87*"/>
+            <ColumnDefinition Width="253*"/>
+            <ColumnDefinition Width="455*"/>
+            <ColumnDefinition Width="253*"/>
+            <ColumnDefinition Width="202*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="tbkInstructions" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" TextWrapping="WrapWholeWords" Text="In a moment, a set of digits will appear. Try to memorize all the digits in the time alloted. If you can correctly recall the set of digits, a new set of digits will appear, with one more digit than the previous set and 5 more seconds added to the timer. The test ends if you incorrectly memorize two sets of digits in a row." />
+
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        <Viewbox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+            <TextBlock Text="Numbers" Grid.Row="0" Grid.Column="0"  />
+        </Viewbox>
+        </Grid>
+
+
+        <Grid Grid.Column="3" Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="tbxAnswer" InputScope="Number" Grid.Row="1"  Visibility="Collapsed"/>
+
+            <Button x:Name="btnAnswerNow"  Grid.Row="0" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  Click="btnAnswerNow_Click" Style="{StaticResource style_Answers}" Visibility="Collapsed">
+                <Viewbox>
+                    <TextBlock Text="I'm ready to answer" />
+                </Viewbox>
+            </Button>
+        </Grid>
+
+
+        <ScrollViewer Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3">
+            <TextBlock x:Name="tbkDisplayNumbers"  TextAlignment="Center"  TextWrapping="Wrap" />
+        </ScrollViewer>
+
+        <Grid Grid.Row="4" Grid.Column="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        <Button x:Name="btnAnswer" Grid.Column="0" VerticalAlignment="Stretch"  Click="btnAnswer_Click" Style="{StaticResource style_Answers}" Visibility="Collapsed">
+            <Viewbox>
+                <TextBlock Text="Answer" />
+            </Viewbox>
+        </Button>
+        </Grid>
+
+        <ScrollViewer Grid.Column="3" Grid.Row="5" >
+            <TextBlock x:Name="tbkAnalysis"  />
+        </ScrollViewer>
+
+        <Grid  Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Viewbox x:Name="viewbox_tbkTimeRemaining_Minutes"  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <TextBlock x:Name="tbkTimeRemaining_Minutes" VerticalAlignment="Stretch" HorizontalAlignment="Right" />
+            </Viewbox>
+
+            <Viewbox x:Name="viewbox_tbkTimeRemaining_Seconds"  Grid.Column="2" Grid.Row="1">
+                <TextBlock x:Name="tbkTimeRemaining_Seconds" HorizontalAlignment="Left"  TextAlignment="Left" VerticalAlignment="Stretch" />
+            </Viewbox>
+
+            <Viewbox x:Name="viewbox_tbkTimeRemaining"  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2">
+                <TextBlock x:Name="tbkTimeRemaining" TextAlignment="Center" Text="Time Remaining" Visibility="Collapsed" />
+            </Viewbox>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="Memory_App_v1.Freestyle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="tbkDisplay" Grid.Column="1" Grid.Row="2" Text="Hi" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="20" TextWrapping="WrapWholeWords"/>
+        <TextBox x:Name="tbxAnswer" Grid.Column="1" Grid.Row="3" />
+        <Button x:Name="btnAnswer" Grid.Column="2" Grid.Row="3" Content="Answer" VerticalAlignment="Stretch" Click="btnAnswer_Click"/>
+        
+        <Button x:Name="btnModeNumber" Grid.Column="0" Grid.Row="3" Content="Number" VerticalAlignment="Top" Click="btnModeNumber_Click"/>
+        <Button x:Name="btnModeLetter" Grid.Column="0" Grid.Row="3" Content="Letter" VerticalAlignment="Center" Click="btnModeLetter_Click"/>
+        <Button x:Name="btnModeSymbol" Grid.Column="0" Grid.Row="3" Content="Symbol" VerticalAlignment="Bottom" Click="btnModeSymbol_Click"/>
+
+        <TextBlock x:Name="tbkAnalysis" Grid.Column="1" Grid.Row="1"  TextWrapping="WrapWholeWords"/>
+    </Grid>
+</Page>

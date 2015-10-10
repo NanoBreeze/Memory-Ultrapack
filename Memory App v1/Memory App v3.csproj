@@ -1,0 +1,532 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7FB9B45-2D55-4FDF-8795-7D467054F2AD}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Memory_App_v1</RootNamespace>
+    <AssemblyName>Memory App v1</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{BC8A1FFA-BEE3-4634-8014-F334798102B3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Memory App v3_StoreKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxPackageDir>C:\Users\Linyi C\Desktop\</AppxPackageDir>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>560B140AE577E4EF4B21ADDD5C023DE912F7F738</PackageCertificateThumbprint>
+    <AppxBundle>Always</AppxBundle>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_APP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\ApplicationContainerData.cs" />
+    <Compile Include="Games\Level1.xaml.cs">
+      <DependentUpon>Level1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level10.xaml.cs">
+      <DependentUpon>Level10.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level10Answer.xaml.cs">
+      <DependentUpon>Level10Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level11.xaml.cs">
+      <DependentUpon>Level11.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level11Answer.xaml.cs">
+      <DependentUpon>Level11Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level12.xaml.cs">
+      <DependentUpon>Level12.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level12Answer.xaml.cs">
+      <DependentUpon>Level12Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level13.xaml.cs">
+      <DependentUpon>Level13.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level13Answer.xaml.cs">
+      <DependentUpon>Level13Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level14.xaml.cs">
+      <DependentUpon>Level14.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level14Answer.xaml.cs">
+      <DependentUpon>Level14Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level15.xaml.cs">
+      <DependentUpon>Level15.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level15Answer.xaml.cs">
+      <DependentUpon>Level15Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level1Answer.xaml.cs">
+      <DependentUpon>Level1Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level2.xaml.cs">
+      <DependentUpon>Level2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level2Answer.xaml.cs">
+      <DependentUpon>Level2Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level3.xaml.cs">
+      <DependentUpon>Level3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level3Answer.xaml.cs">
+      <DependentUpon>Level3Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level4.xaml.cs">
+      <DependentUpon>Level4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level4Answer.xaml.cs">
+      <DependentUpon>Level4Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level5.xaml.cs">
+      <DependentUpon>Level5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level5Answer.xaml.cs">
+      <DependentUpon>Level5Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level6.xaml.cs">
+      <DependentUpon>Level6.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level6Answer.xaml.cs">
+      <DependentUpon>Level6Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level7.xaml.cs">
+      <DependentUpon>Level7.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level7Answer.xaml.cs">
+      <DependentUpon>Level7Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level8Answer.xaml.cs">
+      <DependentUpon>Level8Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level8.xaml.cs">
+      <DependentUpon>Level8.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level9.xaml.cs">
+      <DependentUpon>Level9.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Games\Level9Answer.xaml.cs">
+      <DependentUpon>Level9Answer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NumbersLettersSymbols.xaml.cs">
+      <DependentUpon>NumbersLettersSymbols.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cards.xaml.cs">
+      <DependentUpon>Cards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Cards2.xaml.cs">
+      <DependentUpon>Cards2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Freestyle.xaml.cs">
+      <DependentUpon>Freestyle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Game.xaml.cs">
+      <DependentUpon>Game.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Highscore.xaml.cs">
+      <DependentUpon>Highscore.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Practice.xaml.cs">
+      <DependentUpon>Practice.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Cards.xaml.cs">
+      <DependentUpon>Test_Cards.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Numbers.xaml.cs">
+      <DependentUpon>Test_Numbers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Letters.xaml.cs">
+      <DependentUpon>Test_Letters.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Test_Symbols.xaml.cs">
+      <DependentUpon>Test_Symbols.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\150150.png" />
+    <Content Include="Assets\310150.scale-100.png" />
+    <Content Include="Assets\CardPage.png" />
+    <Content Include="Assets\CardPageImage.png" />
+    <Content Include="Assets\Club.png" />
+    <Content Include="Assets\Clubs\C1.png" />
+    <Content Include="Assets\Clubs\C10.png" />
+    <Content Include="Assets\Clubs\C11.png" />
+    <Content Include="Assets\Clubs\C12.png" />
+    <Content Include="Assets\Clubs\C13.png" />
+    <Content Include="Assets\Clubs\C2.png" />
+    <Content Include="Assets\Clubs\C3.png" />
+    <Content Include="Assets\Clubs\C4.png" />
+    <Content Include="Assets\Clubs\C5.png" />
+    <Content Include="Assets\Clubs\C6.png" />
+    <Content Include="Assets\Clubs\C7.png" />
+    <Content Include="Assets\Clubs\C8.png" />
+    <Content Include="Assets\Clubs\C9.png" />
+    <Content Include="Assets\Diamond.png" />
+    <Content Include="Assets\Diamonds\D1.png" />
+    <Content Include="Assets\Diamonds\D10.png" />
+    <Content Include="Assets\Diamonds\D11.png" />
+    <Content Include="Assets\Diamonds\D12.png" />
+    <Content Include="Assets\Diamonds\D13.png" />
+    <Content Include="Assets\Diamonds\D2.png" />
+    <Content Include="Assets\Diamonds\D3.png" />
+    <Content Include="Assets\Diamonds\D4.png" />
+    <Content Include="Assets\Diamonds\D5.png" />
+    <Content Include="Assets\Diamonds\D6.png" />
+    <Content Include="Assets\Diamonds\D7.png" />
+    <Content Include="Assets\Diamonds\D8.png" />
+    <Content Include="Assets\Diamonds\D9.png" />
+    <Content Include="Assets\games.png" />
+    <Content Include="Assets\Heart.png" />
+    <Content Include="Assets\Hearts\H1.png" />
+    <Content Include="Assets\Hearts\H10.png" />
+    <Content Include="Assets\Hearts\H11.png" />
+    <Content Include="Assets\Hearts\H12.png" />
+    <Content Include="Assets\Hearts\H13.png" />
+    <Content Include="Assets\Hearts\H2.png" />
+    <Content Include="Assets\Hearts\H3.png" />
+    <Content Include="Assets\Hearts\H4.png" />
+    <Content Include="Assets\Hearts\H5.png" />
+    <Content Include="Assets\Hearts\H6.png" />
+    <Content Include="Assets\Hearts\H7.png" />
+    <Content Include="Assets\Hearts\H8.png" />
+    <Content Include="Assets\Hearts\H9.png" />
+    <Content Include="Assets\highscore.png" />
+    <Content Include="Assets\Logo.scale-100.png" />
+    <Content Include="Assets\NumberLetterSymbol.png" />
+    <Content Include="Assets\NumberLetterSymbolImage.png" />
+    <Content Include="Assets\OneCard.png" />
+    <Content Include="Assets\Practice.png" />
+    <Content Include="Assets\SmallLogo.scale-100.png" />
+    <Content Include="Assets\SmallLogo.scale-180.png" />
+    <Content Include="Assets\Spade.png" />
+    <Content Include="Assets\Spades\S1.png" />
+    <Content Include="Assets\Spades\S10.png" />
+    <Content Include="Assets\Spades\S11.png" />
+    <Content Include="Assets\Spades\S12.png" />
+    <Content Include="Assets\Spades\S13.png" />
+    <Content Include="Assets\Spades\S2.png" />
+    <Content Include="Assets\Spades\S3.png" />
+    <Content Include="Assets\Spades\S4.png" />
+    <Content Include="Assets\Spades\S5.png" />
+    <Content Include="Assets\Spades\S6.png" />
+    <Content Include="Assets\Spades\S7.png" />
+    <Content Include="Assets\Spades\S8.png" />
+    <Content Include="Assets\Spades\S9.png" />
+    <Content Include="Assets\Splash.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\Square 3030.scale-100.png" />
+    <Content Include="Assets\Store5050.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\test.png" />
+    <Content Include="Assets\TestSymbols.png" />
+    <Content Include="Assets\test_cards.png" />
+    <Content Include="Assets\Test_letters.png" />
+    <Content Include="Assets\Test_numbers.png" />
+    <Content Include="Assets\ThreeCards.png" />
+    <Content Include="Assets\TwoCards.png" />
+    <None Include="Memory App v3_StoreKey.pfx" />
+    <None Include="Memory App v3_TemporaryKey.pfx" />
+    <None Include="Package.StoreAssociation.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Games\Level1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level10.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level10Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level11.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level11Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level12.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level12Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level13.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level13Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level14.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level14Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level15.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level15Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level1Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level2Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level3Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level4.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level4Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level5.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level5Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level6.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level6Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level7.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level7Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level8Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level8.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level9.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Games\Level9Answer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NumbersLettersSymbols.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Cards2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Freestyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Game.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Highscore.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Practice.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test_Cards.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test_Numbers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test_Letters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Test_Symbols.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

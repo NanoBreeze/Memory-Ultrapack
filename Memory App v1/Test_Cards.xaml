@@ -1,0 +1,1138 @@
+﻿<Page
+    x:Class="Memory_App_v1.Test_Cards"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Page.BottomAppBar>
+        <CommandBar Background="DarkBlue" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonCaption" Label="Show Answer's Transcript" Icon="Caption"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Back" Label="Test Page" Click="appbarButtonBack_Click"/>
+                <AppBarButton Icon="Home" Label="Main Menu" Click="appbarButtonHome_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+
+
+    <Page.Resources>
+
+        <Storyboard x:Name="stryInstruction">
+            <DoubleAnimation Storyboard.TargetName="tbkInstructions" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1"/>
+        </Storyboard>
+
+        <Style x:Key="style_Answers" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="12,4,12,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid Background="#FF117B85">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="#FF0D6C76" Offset="1"/>
+                                                            <GradientStop Color="#FF0EA8B8" Offset="0"/>
+                                                        </LinearGradientBrush>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="Yellow"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FF33929B"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="#FFFDF072"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                            <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+    <Page.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF0EA8B8" Offset="0"/>
+            <GradientStop Color="#FFFDF072" Offset="1"/>
+        </LinearGradientBrush>
+    </Page.Background>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF1720DE" Offset="0"/>
+                <GradientStop Color="#FF090C59" Offset="1"/>
+                <GradientStop Color="#FF11157E" Offset="0.43"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="116*"/>
+            <ColumnDefinition Width="87*"/>
+            <ColumnDefinition Width="253*"/>
+            <ColumnDefinition Width="455*"/>
+            <ColumnDefinition Width="253*"/>
+            <ColumnDefinition Width="202*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="tbkInstructions" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" TextWrapping="WrapWholeWords" Text="In a moment, a set of cards will appear. Try to memorize all the cards in the time alloted. If you can correctly recall the set of cards, a new set of cards will appear, with one more card than the previous set and 10 more seconds added to the timer. The test ends if you incorrectly memorize two sets of cards in a row."/>
+        
+        
+        <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Left">
+            <TextBlock Text="Cards" Grid.Row="0" Grid.Column="0"  />
+        </Viewbox>
+        
+        <ScrollViewer Grid.Row="5" Grid.Column="3" >
+        <TextBlock x:Name="tbkAnalysis" />
+        </ScrollViewer>
+
+        <Button x:Name="btnAnswerNow"  Grid.Row="4" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Stretch"   Click="btnAnswerNow_Click" Style="{StaticResource style_Answers}" Visibility="Collapsed">
+            <Viewbox>
+                <TextBlock Text="I'm ready to answer" />
+            </Viewbox>
+        </Button>
+
+
+        <ScrollViewer x:Name="scrollviewer_imagesdisplay" Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="3" Grid.RowSpan="2">
+            <Canvas x:Name="canvas" Height="2500">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image x:Name="image1" Grid.Row="0" Grid.Column="0"/>
+                    <Image x:Name="image2" Grid.Row="0" Grid.Column="1"/>
+                    <Image x:Name="image3" Grid.Row="0" Grid.Column="2"/>
+                    <Image x:Name="image4" Grid.Row="0" Grid.Column="3"/>
+                    <Image x:Name="image5" Grid.Row="0" Grid.Column="4"/>
+                    <Image x:Name="image6" Grid.Row="0" Grid.Column="5"/>
+
+                    <Image x:Name="image7" Grid.Row="1" Grid.Column="0"/>
+                    <Image x:Name="image8" Grid.Row="1" Grid.Column="1"/>
+                    <Image x:Name="image9" Grid.Row="1" Grid.Column="2"/>
+                    <Image x:Name="image10" Grid.Row="1" Grid.Column="3"/>
+                    <Image x:Name="image11" Grid.Row="1" Grid.Column="4"/>
+                    <Image x:Name="image12" Grid.Row="2" Grid.Column="5"/>
+                    
+                    <Image x:Name="image13" Grid.Row="2" Grid.Column="0"/>
+                    <Image x:Name="image14" Grid.Row="2" Grid.Column="1"/>
+                    <Image x:Name="image15" Grid.Row="2" Grid.Column="2"/>
+                    <Image x:Name="image16" Grid.Row="2" Grid.Column="3"/>
+                    <Image x:Name="image17" Grid.Row="2" Grid.Column="4"/>
+                    <Image x:Name="image18" Grid.Row="3" Grid.Column="5"/>
+                    
+                    <Image x:Name="image19" Grid.Row="3" Grid.Column="0"/>
+                    <Image x:Name="image20" Grid.Row="3" Grid.Column="1"/>
+                    <Image x:Name="image21" Grid.Row="3" Grid.Column="2"/>
+                    <Image x:Name="image22" Grid.Row="3" Grid.Column="3"/>
+                    <Image x:Name="image23" Grid.Row="3" Grid.Column="4"/>
+                    <Image x:Name="image24" Grid.Row="3" Grid.Column="5"/>
+
+                    <Image x:Name="image25" Grid.Row="4" Grid.Column="0"/>
+                    <Image x:Name="image26" Grid.Row="4" Grid.Column="1"/>
+                    <Image x:Name="image27" Grid.Row="4" Grid.Column="2"/>
+                    <Image x:Name="image28" Grid.Row="4" Grid.Column="3"/>
+                    <Image x:Name="image29" Grid.Row="4" Grid.Column="4"/>
+                    <Image x:Name="image30" Grid.Row="4" Grid.Column="5"/>
+
+                    <Image x:Name="image31" Grid.Row="5" Grid.Column="0"/>
+                    <Image x:Name="image32" Grid.Row="5" Grid.Column="1"/>
+                    <Image x:Name="image33" Grid.Row="5" Grid.Column="2"/>
+                    <Image x:Name="image34" Grid.Row="5" Grid.Column="3"/>
+                    <Image x:Name="image35" Grid.Row="5" Grid.Column="4"/>
+                    <Image x:Name="image36" Grid.Row="5" Grid.Column="5"/>
+
+                    <Image x:Name="image37" Grid.Row="6" Grid.Column="0"/>
+                    <Image x:Name="image38" Grid.Row="6" Grid.Column="1"/>
+                    <Image x:Name="image39" Grid.Row="6" Grid.Column="2"/>
+                    <Image x:Name="image40" Grid.Row="6" Grid.Column="3"/>
+                    <Image x:Name="image41" Grid.Row="6" Grid.Column="4"/>
+                    <Image x:Name="image42" Grid.Row="6" Grid.Column="5"/>
+
+                    <Image x:Name="image43" Grid.Row="7" Grid.Column="0"/>
+                    <Image x:Name="image44" Grid.Row="7" Grid.Column="1"/>
+                    <Image x:Name="image45" Grid.Row="7" Grid.Column="2"/>
+                    <Image x:Name="image46" Grid.Row="7" Grid.Column="3"/>
+                    <Image x:Name="image47" Grid.Row="7" Grid.Column="4"/>
+                    <Image x:Name="image48" Grid.Row="7" Grid.Column="5"/>
+
+                    <Image x:Name="image49" Grid.Row="8" Grid.Column="0"/>
+                    <Image x:Name="image50" Grid.Row="8" Grid.Column="1"/>
+                    <Image x:Name="image51" Grid.Row="8" Grid.Column="2"/>
+                    <Image x:Name="image52" Grid.Row="8" Grid.Column="3"/>
+
+                </Grid>
+            </Canvas>
+        </ScrollViewer>
+
+        <ScrollViewer x:Name="scrollviewer_answer" Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="3" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Auto" Visibility="Collapsed">
+            <Canvas Height="1000" Width="2500">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Spades -->
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S1" Source="ms-appx:///Assets/Spades/S1.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S1_PointerPressed"/>
+                        <TextBlock x:Name="tbk1" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" Foreground="White" VerticalAlignment="Center" Opacity="0" PointerPressed="tbk1_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Width="100">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S2" Source="ms-appx:///Assets/Spades/S2.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S2_PointerPressed"/>
+                        <TextBlock x:Name="tbk2" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk2_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S3" Source="ms-appx:///Assets/Spades/S3.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S3_PointerPressed"/>
+                        <TextBlock x:Name="tbk3" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk3_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="0" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S4" Source="ms-appx:///Assets/Spades/S4.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S4_PointerPressed"/>
+                        <TextBlock x:Name="tbk4" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk4_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S5" Source="ms-appx:///Assets/Spades/S5.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S5_PointerPressed"/>
+                        <TextBlock x:Name="tbk5" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk5_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S6" Source="ms-appx:///Assets/Spades/S6.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S6_PointerPressed"/>
+                        <TextBlock x:Name="tbk6" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk6_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S7" Source="ms-appx:///Assets/Spades/S7.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S7_PointerPressed"/>
+                        <TextBlock x:Name="tbk7" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk7_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S8" Source="ms-appx:///Assets/Spades/S8.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S8_PointerPressed"/>
+                        <TextBlock x:Name="tbk8" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk8_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S9" Source="ms-appx:///Assets/Spades/S9.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S9_PointerPressed"/>
+                        <TextBlock x:Name="tbk9" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk9_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="0" Grid.Column="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S10" Source="ms-appx:///Assets/Spades/S10.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S10_PointerPressed"/>
+                        <TextBlock x:Name="tbk10" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk10_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="0" Grid.Column="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S11" Source="ms-appx:///Assets/Spades/S11.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S11_PointerPressed"/>
+                        <TextBlock x:Name="tbk11" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk11_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="0" Grid.Column="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S12" Source="ms-appx:///Assets/Spades/S12.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S12_PointerPressed"/>
+                        <TextBlock x:Name="tbk12" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk12_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="0" Grid.Column="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_S13" Source="ms-appx:///Assets/Spades/S13.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_S13_PointerPressed"/>
+                        <TextBlock x:Name="tbk13" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbk13_PointerPressed"/>
+                    </Grid>
+
+
+
+
+
+                    <!-- Hearts -->
+                    <Grid Grid.Row="1" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H1" Source="ms-appx:///Assets/Hearts/H1.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H1_PointerPressed"/>
+                        <TextBlock x:Name="tbkH1" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" Foreground="White" Opacity="0" PointerPressed="tbkH1_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H2" Source="ms-appx:///Assets/Hearts/H2.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H2_PointerPressed"/>
+                        <TextBlock x:Name="tbkH2" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH2_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H3" Source="ms-appx:///Assets/Hearts/H3.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H3_PointerPressed"/>
+                        <TextBlock x:Name="tbkH3" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH3_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="1" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H4" Source="ms-appx:///Assets/Hearts/H4.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H4_PointerPressed"/>
+                        <TextBlock x:Name="tbkH4" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH4_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H5" Source="ms-appx:///Assets/Hearts/H5.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H5_PointerPressed"/>
+                        <TextBlock x:Name="tbkH5" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH5_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H6" Source="ms-appx:///Assets/Hearts/H6.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H6_PointerPressed"/>
+                        <TextBlock x:Name="tbkH6" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH6_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H7" Source="ms-appx:///Assets/Hearts/H7.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H7_PointerPressed"/>
+                        <TextBlock x:Name="tbkH7" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH7_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H8" Source="ms-appx:///Assets/Hearts/H8.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H8_PointerPressed"/>
+                        <TextBlock x:Name="tbkH8" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH8_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H9" Source="ms-appx:///Assets/Hearts/H9.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H9_PointerPressed"/>
+                        <TextBlock x:Name="tbkH9" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH9_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="1" Grid.Column="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H10" Source="ms-appx:///Assets/Hearts/H10.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H10_PointerPressed"/>
+                        <TextBlock x:Name="tbkH10" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH10_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="1" Grid.Column="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H11" Source="ms-appx:///Assets/Hearts/H11.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H11_PointerPressed"/>
+                        <TextBlock x:Name="tbkH11" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH11_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="1" Grid.Column="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H12" Source="ms-appx:///Assets/Hearts/H12.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H12_PointerPressed"/>
+                        <TextBlock x:Name="tbkH12" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH12_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Grid.Column="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_H13" Source="ms-appx:///Assets/Hearts/H13.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_H13_PointerPressed"/>
+                        <TextBlock x:Name="tbkH13" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkH13_PointerPressed"/>
+                    </Grid>
+
+
+
+
+                    <!-- Clubs-->
+
+
+
+                    <Grid Grid.Row="2" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C1" Source="ms-appx:///Assets/Clubs/C1.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C1_PointerPressed"/>
+                        <TextBlock x:Name="tbkC1" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" Foreground="White" Opacity="0" PointerPressed="tbkC1_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C2" Source="ms-appx:///Assets/Clubs/C2.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C2_PointerPressed"/>
+                        <TextBlock x:Name="tbkC2" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC2_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C3" Source="ms-appx:///Assets/Clubs/C3.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C3_PointerPressed"/>
+                        <TextBlock x:Name="tbkC3" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC3_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="2" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C4" Source="ms-appx:///Assets/Clubs/C4.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C4_PointerPressed"/>
+                        <TextBlock x:Name="tbkC4" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC4_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C5" Source="ms-appx:///Assets/Clubs/C5.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C5_PointerPressed"/>
+                        <TextBlock x:Name="tbkC5" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC5_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C6" Source="ms-appx:///Assets/Clubs/C6.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C6_PointerPressed"/>
+                        <TextBlock x:Name="tbkC6" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC6_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C7" Source="ms-appx:///Assets/Clubs/C7.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C7_PointerPressed"/>
+                        <TextBlock x:Name="tbkC7" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC7_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C8" Source="ms-appx:///Assets/Clubs/C8.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C8_PointerPressed"/>
+                        <TextBlock x:Name="tbkC8" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC8_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C9" Source="ms-appx:///Assets/Clubs/C9.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C9_PointerPressed"/>
+                        <TextBlock x:Name="tbkC9" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC9_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="2" Grid.Column="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C10" Source="ms-appx:///Assets/Clubs/C10.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C10_PointerPressed"/>
+                        <TextBlock x:Name="tbkC10" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC10_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="2" Grid.Column="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C11" Source="ms-appx:///Assets/Clubs/C11.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C11_PointerPressed"/>
+                        <TextBlock x:Name="tbkC11" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC11_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="2" Grid.Column="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C12" Source="ms-appx:///Assets/Clubs/C12.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C12_PointerPressed"/>
+                        <TextBlock x:Name="tbkC12" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC12_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Grid.Column="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_C13" Source="ms-appx:///Assets/Clubs/C13.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_C13_PointerPressed"/>
+                        <TextBlock x:Name="tbkC13" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkC13_PointerPressed"/>
+                    </Grid>
+
+                    <!-- Diamonds -->
+
+
+                    <Grid Grid.Row="3" Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D1" Source="ms-appx:///Assets/Diamonds/D1.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D1_PointerPressed"/>
+                        <TextBlock x:Name="tbkD1" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" TextAlignment="Center" Foreground="White" Opacity="0" PointerPressed="tbkD1_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D2" Source="ms-appx:///Assets/Diamonds/D2.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D2_PointerPressed"/>
+                        <TextBlock x:Name="tbkD2" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD2_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D3" Source="ms-appx:///Assets/Diamonds/D3.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D3_PointerPressed"/>
+                        <TextBlock x:Name="tbkD3" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD3_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3" Grid.Column="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D4" Source="ms-appx:///Assets/Diamonds/D4.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D4_PointerPressed"/>
+                        <TextBlock x:Name="tbkD4" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD4_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D5" Source="ms-appx:///Assets/Diamonds/D5.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D5_PointerPressed"/>
+                        <TextBlock x:Name="tbkD5" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD5_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D6" Source="ms-appx:///Assets/Diamonds/D6.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D6_PointerPressed"/>
+                        <TextBlock x:Name="tbkD6" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD6_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D7" Source="ms-appx:///Assets/Diamonds/D7.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D7_PointerPressed"/>
+                        <TextBlock x:Name="tbkD7" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD7_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="7">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D8" Source="ms-appx:///Assets/Diamonds/D8.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D8_PointerPressed"/>
+                        <TextBlock x:Name="tbkD8" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD8_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D9" Source="ms-appx:///Assets/Diamonds/D9.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D9_PointerPressed"/>
+                        <TextBlock x:Name="tbkD9" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD9_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3" Grid.Column="9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D10" Source="ms-appx:///Assets/Diamonds/D10.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D10_PointerPressed"/>
+                        <TextBlock x:Name="tbkD10" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD10_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3" Grid.Column="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D11" Source="ms-appx:///Assets/Diamonds/D11.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D11_PointerPressed"/>
+                        <TextBlock x:Name="tbkD11" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD11_PointerPressed"/>
+                    </Grid>
+
+
+                    <Grid Grid.Row="3" Grid.Column="11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D12" Source="ms-appx:///Assets/Diamonds/D12.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D12_PointerPressed"/>
+                        <TextBlock x:Name="tbkD12" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD12_PointerPressed"/>
+                    </Grid>
+
+                    <Grid Grid.Row="3" Grid.Column="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Image x:Name="image_D13" Source="ms-appx:///Assets/Diamonds/D13.png" Canvas.ZIndex="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="3" Opacity="1" PointerPressed="image_D13_PointerPressed"/>
+                        <TextBlock x:Name="tbkD13" Grid.ColumnSpan="3" TextAlignment="Center" Canvas.ZIndex="2"  Text="1" FontSize="50" FontWeight="Bold" Grid.Row="1" Grid.Column="0" Foreground="White" Opacity="0" PointerPressed="tbkD13_PointerPressed"/>
+                    </Grid>
+                </Grid>
+            </Canvas> 
+        </ScrollViewer>
+
+
+
+        <Grid Grid.Column="4" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAnswer" Grid.Column="0" VerticalAlignment="Stretch" Click="btnAnswer_Click" Style="{StaticResource style_Answers}" Visibility="Collapsed" >
+                <Viewbox>
+                    <TextBlock Text="Answer"/>
+                </Viewbox>
+            </Button>
+        </Grid>
+
+
+        <Grid  Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Viewbox x:Name="viewbox_tbkTimeRemaining_Minutes"  Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                <TextBlock x:Name="tbkTimeRemaining_Minutes" VerticalAlignment="Stretch" HorizontalAlignment="Right" />
+            </Viewbox>
+
+            <Viewbox x:Name="viewbox_tbkTimeRemaining_Seconds"  Grid.Column="2" Grid.Row="1">
+                <TextBlock x:Name="tbkTimeRemaining_Seconds" HorizontalAlignment="Left"  TextAlignment="Left" VerticalAlignment="Stretch" />
+            </Viewbox>
+
+            <Viewbox x:Name="viewbox_tbkTimeRemaining"  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2">
+                <TextBlock x:Name="tbkTimeRemaining" TextAlignment="Center" Text="Time Remaining" Opacity="0" />
+            </Viewbox>
+        </Grid>
+
+        <TextBlock x:Name="tbkNumberOfCardsRemaining" Grid.Column="5" HorizontalAlignment="Left" Grid.Row="1" TextAlignment="Center" Grid.RowSpan="5" TextWrapping="WrapWholeWords" Text="TextBlock" VerticalAlignment="Top" Opacity="0"/>
+
+    </Grid>
+</Page>

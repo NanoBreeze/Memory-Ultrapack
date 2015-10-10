@@ -1,0 +1,127 @@
+﻿<Page
+    x:Class="Memory_App_v1.Games.Level2Answer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1.Games"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF813B0B" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonRestart" Label="Restart level" Icon="Redo"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="appbarbuttonBackToGamesPage" Label="Games Page" Icon="Back"  Click="appbarbuttonBackToGamesPage_Click" />
+                <AppBarButton x:Name="appbarbuttonMainMenu" Label="Main Menu" Icon="Home"  Click="appbarbuttonMainMenu_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <Storyboard x:Name="strybtnNextLevel">
+            <DoubleAnimation Storyboard.TargetName="btnNextLevel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource GamesAnswer}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Viewbox Grid.Row="5" Grid.Column="5" >
+            <AppBarButton x:Name="btnNextLevel" Icon="Go"  Label="Advance to A3" Foreground="Green" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" Opacity="0" Style="{StaticResource AppBarButtonNext}" Click="btnNextLevel_Click"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4" VerticalAlignment="Center" >
+            <TextBlock Text="Please enter the numbers, letters, and symbols you memorized"  />
+        </Viewbox>
+
+        <ScrollViewer Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="5">
+            <TextBlock x:Name ="tbkResult"  VerticalAlignment="Center" HorizontalAlignment="Left"  />
+        </ScrollViewer>
+
+
+        <Viewbox Grid.Row="2" Grid.Column="1">
+            <TextBlock  Text="Numbers you saw:"  TextWrapping="WrapWholeWords"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="1">
+            <TextBlock  Text="Letters you saw:"  TextWrapping="WrapWholeWords"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="4" Grid.Column="1">
+            <TextBlock  Text="Symbols you saw:"  TextWrapping="WrapWholeWords"/>
+        </Viewbox>
+
+        <Button x:Name="btnCheck" Grid.Row="5" Grid.Column="4" Click="btnCheck_Click" Style="{ThemeResource styleReadyToAnswer}">
+            <Viewbox>
+                <TextBlock Text="Submit"/>
+            </Viewbox>
+        </Button>
+
+        <Viewbox Grid.Row="2" Grid.Column="2">
+            <TextBox x:Name="tbxNumber1"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber1_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="3">
+            <TextBox x:Name="tbxNumber2"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber2_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="4">
+            <TextBox x:Name="tbxNumber3"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber3_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="5">
+            <TextBox x:Name="tbxNumber4"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber4_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="6">
+            <TextBox x:Name="tbxNumber5"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber5_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="7">
+            <TextBox x:Name="tbxNumber6"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxNumber6_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="2">
+            <TextBox x:Name="tbxLetter1"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" TextChanged="tbxLetter1_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="3">
+            <TextBox x:Name="tbxLetter2"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" TextChanged="tbxLetter2_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="4">
+            <TextBox x:Name="tbxLetter3"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" TextChanged="tbxLetter3_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="4" Grid.Column="2">
+            <TextBox x:Name="tbxSymbol1"  TextAlignment="Center" MaxLength="1" BorderBrush="LightBlue" InputScope="Number" TextChanged="tbxSymbol1_TextChanged"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="4" Grid.Column="3">
+            <TextBox x:Name="tbxSymbol2"  TextAlignment="Center" MaxLength="1" InputScope="Number" BorderBrush="LightBlue"/>
+        </Viewbox>
+
+    </Grid>
+</Page>

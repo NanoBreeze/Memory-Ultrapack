@@ -1,0 +1,299 @@
+﻿<Page
+    x:Class="Memory_App_v1.Cards"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF0A320A" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Timer" Icon="Clock">
+                    <AppBarButton.Flyout>
+                        <Flyout Placement="Top">
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="Set Time"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="commandbar_timer_tbxMinutes" Header="Minutes" Text=""/>
+                                    <TextBox x:Name="commandbar_timer_tbxSeconds" Header="Seconds" Text=""/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Flyout>
+                    </AppBarButton.Flyout>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Icon="Back" Label="Practice Page" Click="appbarButtonBack_Click"/>
+                <AppBarButton Icon="Home" Label="Main Menu" Click="appbarButtonHome_Click"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+
+    <Page.Resources>
+        <Storyboard x:Name="stbAnimatingImage" Storyboard.TargetName="imageBoxTransform">
+            <DoubleAnimation x:Name="doubleAnimationX"  Storyboard.TargetProperty="TranslateX"  From="0" Duration="0:0:2" EnableDependentAnimation="True" />
+            <DoubleAnimation x:Name="doubleAnimationY"  Storyboard.TargetProperty="TranslateY"  From="0" Duration="0:0:2" EnableDependentAnimation="True" />
+        </Storyboard>
+        <Style x:Key="styleSuite" TargetType="Button">
+            <Setter Property="Background" Value="{ThemeResource ButtonBackgroundThemeBrush}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ButtonForegroundThemeBrush}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ButtonBorderThemeBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="12,4,12,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused"/>
+                                    <VisualState x:Name="PointerFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                            <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                            <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+
+
+
+
+    <Grid x:Name="grid">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF0F4416" Offset="0"/>
+                <GradientStop Color="#FF1A8028" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="trid"  Width="84*"/>
+            <ColumnDefinition Width="1151*"/>
+            <ColumnDefinition Width="84*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer x:Name="scrollViewer" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+            <StackPanel x:Name="stpnMain"  Orientation="Vertical"/>
+        </ScrollViewer>
+
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="71*"/>
+                <ColumnDefinition Width="393*"/>
+                <ColumnDefinition Width="300*"/>
+                <ColumnDefinition Width="393*"/>
+                <ColumnDefinition Width="71*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Suites-->
+            <Grid x:Name="gridContainingSuits" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox x:Name="viewboxPleaseSelectSuite" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Center" Opacity="1">
+                    <TextBlock x:Name="tbkPleaseSelectSuite" Text="Please select a suit to memorize"  />
+                </Viewbox>
+
+                <Button x:Name="btnSpades" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray" Click="btnSpades_Click" Style="{StaticResource styleSuite}">
+                    <Viewbox>
+                        <Image Source="ms-appx:///Assets/Spade.png" />
+                    </Viewbox>
+                </Button>
+
+                <Button x:Name="btnHearts" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray" Click="btnHearts_Click" Style="{StaticResource styleSuite}">
+                    <Viewbox>
+                        <Image Source="ms-appx:///Assets/Heart.png" />
+                    </Viewbox>
+                </Button>
+
+                <Button x:Name="btnClubs" Grid.Row="1" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray" Click="btnClubs_Click" Style="{StaticResource styleSuite}">
+                    <Viewbox>
+                        <Image Source="ms-appx:///Assets/Club.png" />
+                    </Viewbox>
+                </Button>
+
+                <Button x:Name="btnDiamonds" Grid.Row="1" Grid.Column="4" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Gray" Click="btnDiamonds_Click" Style="{StaticResource styleSuite}">
+                    <Viewbox>
+                        <Image Source="ms-appx:///Assets/Diamond.png" />
+                    </Viewbox>
+                </Button>
+            </Grid>
+
+            <!--Timer -->
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Viewbox Grid.Row="1"  Grid.Column="3" Grid.ColumnSpan="2">
+                    <TextBlock Text="Time Remaining" HorizontalAlignment="Left" x:Name="tbkTimeRemaining" Foreground="White" Opacity="0"/>
+                </Viewbox>
+
+                <Viewbox Grid.Row="1"  Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2">
+                    <TextBlock  x:Name="tbkDigitalClock_Minutes" HorizontalAlignment="Center" Foreground="White" VerticalAlignment="Center"  />
+                </Viewbox>
+
+                <Viewbox  Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2">
+                    <TextBlock x:Name="tbkDigitalClock_Seconds" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                </Viewbox>
+            </Grid>
+
+            <!--Deck-->
+            <Grid Grid.Row="0" Grid.RowSpan="3" Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Image Source="Assets/ThreeCards.png" x:Name="image_deck" Grid.Row="1" Grid.Column="1" />
+                <Button x:Name="stpn_btnDeck" Grid.Row="1"  Grid.Column="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="stpn_btnDeck_Click" BorderThickness="0">
+                    <Button.Resources>
+                        <Style x:Key="ButtonStyle1" TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Grid>
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Disabled">
+                                                        <Storyboard>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="Border">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBackgroundThemeBrush}"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="Border">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledBorderThemeBrush}"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ButtonDisabledForegroundThemeBrush}"/>
+                                                            </ObjectAnimationUsingKeyFrames>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                                <VisualStateGroup x:Name="FocusStates">
+                                                    <VisualState x:Name="Focused">
+                                                        <Storyboard>
+                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualWhite"/>
+                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="FocusVisualBlack"/>
+                                                        </Storyboard>
+                                                    </VisualState>
+                                                    <VisualState x:Name="Unfocused"/>
+                                                    <VisualState x:Name="PointerFocused"/>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Margin="3">
+                                                <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                            <Rectangle x:Name="FocusVisualWhite" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="1.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                                            <Rectangle x:Name="FocusVisualBlack" IsHitTestVisible="False" Opacity="0" StrokeDashOffset="0.5" StrokeEndLineCap="Square" Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}" StrokeDashArray="1,1"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Style>
+                        <StaticResource ResourceKey="ButtonStyle1"/>
+                    </Button.Style>
+                </Button>
+                <TextBlock x:Name="tbkDeckComplete" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Text="tbkDeckComplete" Opacity="0" />
+
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="131*"/>
+                    <ColumnDefinition Width="147*"/>
+                    <ColumnDefinition Width="103*"/>
+                </Grid.ColumnDefinitions>
+                <Viewbox Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <AppBarButton x:Name="hyperlink" Icon="Edit" Click="hyperlink_Click" Visibility="Visible"/>
+                </Viewbox>
+                <Viewbox x:Name="tbkReadyToRecall" Grid.Column="1">
+                    <TextBlock Text="I'm ready to recall" />
+                </Viewbox>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Memory_App_v1.Games.Level1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1.Games"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF813B0B" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonRestart" Label="Restart level" Icon="Redo"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="appbarbuttonBackToGamesPage" Label="Games Page" Icon="Back"  Click="appbarbuttonBackToGamesPage_Click" />
+                <AppBarButton x:Name="appbarbuttonMainMenu" Label="Main Menu" Icon="Home"  Click="appbarbuttonMainMenu_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+
+
+    <Grid Background="{StaticResource GameBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="gridInstructions" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="1">
+                <TextBlock x:Name="tbkInstructions" Text="Memorize the following digits and letters" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"  VerticalAlignment="Center" />
+            </Viewbox>
+        </Grid>
+
+
+        <TextBlock x:Name="tbkToMemorize" Text="" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" VerticalAlignment="Center" TextAlignment="Center" />
+
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="btnAnswerPage" Grid.Column="1"  HorizontalAlignment="Center" Click="btnAnswerPage_Click" Style="{StaticResource styleReadyToAnswer}" >
+                <Viewbox>
+                    <TextBlock Text="I'm ready to answer" />
+                </Viewbox>
+            </Button>
+
+        </Grid>
+
+    </Grid>
+</Page>

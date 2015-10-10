@@ -1,0 +1,208 @@
+﻿<Page
+    x:Class="Memory_App_v1.Games.Level5"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1.Games"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF813B0B" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonRestart" Label="Restart level" Icon="Redo"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="appbarbuttonBackToGamesPage" Label="Games Page" Icon="Back"  Click="appbarbuttonBackToGamesPage_Click" />
+                <AppBarButton x:Name="appbarbuttonMainMenu" Label="Main Menu" Icon="Home"  Click="appbarbuttonMainMenu_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+    <Page.Resources>
+        <Storyboard x:Name="stryInstructions">
+            <DoubleAnimation Storyboard.TargetName="tbkInstructions" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+        </Storyboard>
+        
+        <Storyboard x:Name="stry1a">
+            <DoubleAnimation Storyboard.TargetName="canvas1" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry1b">
+            <DoubleAnimation Storyboard.TargetName="canvas1" Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:0.5" BeginTime="0:0:2" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2a">
+            <DoubleAnimation Storyboard.TargetName="canvas2" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1" BeginTime="0:0:3" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2b">
+            <DoubleAnimation Storyboard.TargetName="canvas2" Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:1" BeginTime="0:0:2" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry3a">
+            <DoubleAnimation Storyboard.TargetName="canvas3" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1" BeginTime="0:0:3" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry3b">
+            <DoubleAnimation Storyboard.TargetName="canvas3" Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:1" BeginTime="0:0:2" />
+        </Storyboard>
+
+
+        <Storyboard x:Name="stry4a">
+            <DoubleAnimation Storyboard.TargetName="canvas4" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1" BeginTime="0:0:3"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry4b">
+            <DoubleAnimation Storyboard.TargetName="canvas4" Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:1" BeginTime="0:0:2" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry5a">
+            <DoubleAnimation Storyboard.TargetName="canvas5" Storyboard.TargetProperty="Opacity"
+                             From="0" To="1" Duration="0:0:1" BeginTime="0:0:3" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry5b">
+            <DoubleAnimation Storyboard.TargetName="canvas5" Storyboard.TargetProperty="Opacity"
+                             From="1" To="0" Duration="0:0:1" BeginTime="0:0:2" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry6_tbkUnitsShowing1">
+            <DoubleAnimation x:Name="da_viewboxUnitsShowing1" Storyboard.TargetName="viewbox_tbkUnitsShowing1" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:1"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry6_tbkUnitsShowing2">
+            <DoubleAnimation x:Name="da_viewboxUnitsShowing2" Storyboard.TargetName="viewbox_tbkUnitsShowing2" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry6_tbkUnitsShowing3">
+            <DoubleAnimation x:Name="da_viewboxUnitsShowing3" Storyboard.TargetName="viewbox_tbkUnitsShowing3" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:6"/>
+        </Storyboard>
+    </Page.Resources>
+    <Page.Background>
+        <StaticResource ResourceKey="GameLevelBackground"/>
+    </Page.Background>
+
+
+    <Grid Background="{StaticResource GameBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="5" >
+        <TextBlock x:Name="tbkInstructions" Text="Memorize the numbers, letters, and symbols in the order that they appear" />
+        </Viewbox>
+        
+        <Button x:Name="btnGoToAnswerPage"  Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="1" HorizontalAlignment="Center" Click="btnGoToAnswerPage_Click" Style="{ThemeResource styleReadyToAnswer}">
+            <Viewbox>
+                <TextBlock Text="I'm ready to answer" />
+            </Viewbox>
+        </Button>
+
+        <Viewbox x:Name="viewboxUnitsShowing1" Grid.Row="2" Grid.Column="0" Opacity="0">
+            <Viewbox.RenderTransform>
+                <CompositeTransform x:Name="viewbox_tbkUnitsShowing1" />
+            </Viewbox.RenderTransform>
+            <TextBlock x:Name="tbkUnitsShowing1"  HorizontalAlignment="Left" Text="tbkUnitsShowing1"/>
+        </Viewbox>
+
+
+        <Viewbox x:Name="viewboxUnitsShowing2" Grid.Row="6" Grid.Column="3" Opacity="0">
+            <Viewbox.RenderTransform>
+                <CompositeTransform x:Name="viewbox_tbkUnitsShowing2" />
+            </Viewbox.RenderTransform>
+            <TextBlock x:Name="tbkUnitsShowing2"  HorizontalAlignment="Left" Text="tbkUnitsShowing2"/>
+        </Viewbox>
+
+        <Viewbox x:Name="viewboxUnitsShowing3" Grid.Row="6" Grid.Column="4" Opacity="0">
+            <Viewbox.RenderTransform>
+                <CompositeTransform x:Name="viewbox_tbkUnitsShowing3" />
+            </Viewbox.RenderTransform>
+            <TextBlock x:Name="tbkUnitsShowing3"  HorizontalAlignment="Left" Text="tbkUnitsShowing3"/>
+        </Viewbox>
+
+
+        <Canvas x:Name="canvas1" Grid.Row="1" Grid.Column="1" Opacity="0" >
+            <Canvas.RenderTransform>
+                <CompositeTransform x:Name="comptransform_canvas1" />
+            </Canvas.RenderTransform>
+            <Viewbox x:Name="viewbox_textBlock1" Canvas.ZIndex="2">
+             <TextBlock x:Name="textBlock1"  Text="H"  />
+            </Viewbox>
+            <Ellipse x:Name="ellipse1"   Fill="Orange"/>
+        </Canvas>
+
+        <Canvas x:Name="canvas2" Grid.Row="3" Grid.Column="6" Opacity="0" >
+            <Canvas.RenderTransform>
+                <CompositeTransform x:Name="comptransform_canvas2" />
+            </Canvas.RenderTransform>
+            <Viewbox x:Name="viewbox_textBlock2" Canvas.ZIndex="2" >
+                <TextBlock x:Name="textBlock2"  Text="H"  />
+            </Viewbox>
+            <Ellipse x:Name="ellipse2"   Fill="Orange"/>    
+        </Canvas>
+
+        <Canvas x:Name="canvas3" Grid.Row="4" Grid.Column="3" Opacity="0" >
+            <Canvas.RenderTransform>
+                <CompositeTransform x:Name="comptransform_canvas3" />
+            </Canvas.RenderTransform>
+
+            <Viewbox x:Name="viewbox_textBlock3" Canvas.ZIndex="2" >
+                <TextBlock x:Name="textBlock3"  Text="H"  />
+            </Viewbox>
+            <Ellipse x:Name="ellipse3"   Fill="Orange"/>
+        </Canvas>
+
+        <Canvas x:Name="canvas4" Grid.Row="5" Grid.Column="7" Opacity="0" >
+            <Canvas.RenderTransform>
+                <CompositeTransform x:Name="comptransform_canvas4" />
+            </Canvas.RenderTransform>
+
+            <Viewbox x:Name="viewbox_textBlock4" Canvas.ZIndex="2" >
+            <TextBlock x:Name="textBlock4"  Text="H"  />
+            </Viewbox>
+            <Ellipse x:Name="ellipse4"   Fill="Orange"/>
+     
+        </Canvas>
+
+        <Canvas x:Name="canvas5" Grid.Row="2" Grid.Column="4" Opacity="0" >
+            <Canvas.RenderTransform>
+                <CompositeTransform x:Name="comptransform_canvas5" />
+            </Canvas.RenderTransform>
+
+            <Viewbox x:Name="viewbox_textBlock5" Canvas.ZIndex="2" >
+            <TextBlock x:Name="textBlock5"  Text="H"  />
+            </Viewbox>
+            <Ellipse x:Name="ellipse5"   Fill="Orange"/>
+           
+        </Canvas>
+
+
+    </Grid>
+</Page>

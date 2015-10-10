@@ -1,0 +1,254 @@
+﻿<Page
+    x:Class="Memory_App_v1.Games.Level14"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1.Games"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF813B0B" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonRestart" Label="Restart level" Icon="Redo"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="appbarbuttonBackToGamesPage" Label="Games Page" Icon="Back"  Click="appbarbuttonBackToGamesPage_Click" />
+                <AppBarButton x:Name="appbarbuttonMainMenu" Label="Main Menu" Icon="Home"  Click="appbarbuttonMainMenu_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+
+    <Page.Resources>
+        <Storyboard x:Name="stryInstructions">
+            <DoubleAnimation Storyboard.TargetName="tbkInstructions" Storyboard.TargetProperty="Opacity" From="1" To="0" Duration="0:0:1" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing1">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing1X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing1" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:1" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing1Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing1" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:1" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing1" Storyboard.TargetProperty="Opacity " BeginTime="0:0:1"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing2">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing2X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing2" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:2" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing2Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing2" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:2" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing2" Storyboard.TargetProperty="Opacity " BeginTime="0:0:2"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing3">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing3X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing3" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:3" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing3Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing3" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:3" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing3" Storyboard.TargetProperty="Opacity " BeginTime="0:0:3"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing4">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing4X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing4" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:4" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing4Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing4" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:4" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing4" Storyboard.TargetProperty="Opacity " BeginTime="0:0:4"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing5">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing5X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing5" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:5" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing5Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing5" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:5" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing5" Storyboard.TargetProperty="Opacity " BeginTime="0:0:5"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing6">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing6X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing6" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:6" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing6Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing6" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:6" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing6" Storyboard.TargetProperty="Opacity " BeginTime="0:0:6"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing7">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing7X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing7" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:8" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing7Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing7" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:8" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing7" Storyboard.TargetProperty="Opacity " BeginTime="0:0:7"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing8">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing8X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing8" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:10" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing8Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing8" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:10" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing8" Storyboard.TargetProperty="Opacity " BeginTime="0:0:8"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing9">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing9X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing9" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:12" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing9Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing9" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:12" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing9" Storyboard.TargetProperty="Opacity " BeginTime="0:0:9"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry1_tbkUnitsShowing10">
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing10X" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing10" Storyboard.TargetProperty="TranslateX" BeginTime="0:0:14" Duration="0:0:10"/>
+            <DoubleAnimation x:Name="da_viewbox_tbkUnitsShowing10Y" Storyboard.TargetName="comptransform_grid_tbkUnitsShowing10" Storyboard.TargetProperty="TranslateY" BeginTime="0:0:14" Duration="0:0:10"/>
+            <DoubleAnimation Storyboard.TargetName="tbkUnitsShowing10" Storyboard.TargetProperty="Opacity " BeginTime="0:0:10"/>
+        </Storyboard>
+
+        <Storyboard x:Name="stry2_image1">
+            <DoubleAnimation Storyboard.TargetName="image1" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:5" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2_image2">
+            <DoubleAnimation Storyboard.TargetName="image2" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:5" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2_image3">
+            <DoubleAnimation Storyboard.TargetName="image3" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:5" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2_image4">
+            <DoubleAnimation Storyboard.TargetName="image4" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:5" />
+        </Storyboard>
+
+        <Storyboard x:Name="stry2_image5">
+            <DoubleAnimation Storyboard.TargetName="image5" Storyboard.TargetProperty="Opacity" From="1" To="0" BeginTime="0:0:5" />
+        </Storyboard>
+
+    </Page.Resources>
+
+
+
+
+    <Grid Background="{StaticResource GameBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Viewbox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="6">
+            <TextBlock x:Name="tbkInstructions" TextWrapping="WrapWholeWords" >
+        	<Run Text="Memorize the numbers from left to right, starting with the first moving set "/>
+        	<LineBreak/>
+        	<Run Text="Memorize the cards in the order that they appear"/>
+            </TextBlock>
+        </Viewbox>
+
+        <Button x:Name="btnGoToAnswerPage" Grid.Row="5" Grid.Column="6" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="btnGoToAnswerPage_Click" Style="{ThemeResource styleReadyToAnswer}">
+            <Viewbox>
+                <TextBlock Text="I'm ready to answer" />
+            </Viewbox>
+        </Button>
+
+        <Grid Grid.Row="2"  Grid.Column="0" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing1"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing1" Rotation="-45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="3"  Grid.Column="0" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing2"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing2" Rotation="-45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+
+        <Grid Grid.Row="4"  Grid.Column="0" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing3"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing3" Rotation="-45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="5"  Grid.Column="0" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing4"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing4" Rotation="-45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="6"  Grid.Column="0" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing5"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing5" Rotation="-45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="3" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing6"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing6" Rotation="45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="4" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing7"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing7" Rotation="45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="5" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing8"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing8" Rotation="45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="6" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing9"  Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing9" Rotation="45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Grid Grid.Row="0"  Grid.Column="7" RenderTransformOrigin="0.5,0.5" >
+            <Viewbox>
+                <TextBlock x:Name="tbkUnitsShowing10" Opacity="1"/>
+            </Viewbox>
+            <Grid.RenderTransform>
+                <CompositeTransform x:Name="comptransform_grid_tbkUnitsShowing10" Rotation="45"/>
+            </Grid.RenderTransform>
+        </Grid>
+
+
+
+
+        <Image x:Name="image1" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Image x:Name="image2" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <Image x:Name="image3" Grid.Row="2" Grid.Column="6" Grid.ColumnSpan="2" Grid.RowSpan="2" />
+        <Image x:Name="image4" Grid.Row="2" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Image x:Name="image5" Grid.Row="2" Grid.Column="10" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+    </Grid>
+</Page>

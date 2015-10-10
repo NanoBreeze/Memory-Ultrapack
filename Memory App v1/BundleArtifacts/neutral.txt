@@ -1,0 +1,3 @@
+MainPackage=C:\Users\Linyi C\Desktop\Memory App v1 - Copy\Memory App v1\bin\Release\Memory App v3_1.1.0.1_Bundle\Memory App v3_1.1.0.1_AnyCPU.appx
+SymbolPackage=C:\Users\Linyi C\Desktop\Memory App v3_1.1.0.1_Test\Memory App v3_1.1.0.1_AnyCPU.appxsym
+ResourcePack=C:\Users\Linyi C\Desktop\Memory App v1 - Copy\Memory App v1\bin\Release\Memory App v3_1.1.0.1_Bundle\Memory App v3_1.1.0.1_scale-180.appx

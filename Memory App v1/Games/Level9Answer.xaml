@@ -1,0 +1,96 @@
+﻿<Page
+    x:Class="Memory_App_v1.Games.Level9Answer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Memory_App_v1.Games"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.BottomAppBar>
+        <CommandBar Background="#FF813B0B" BorderBrush="Transparent" >
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="appbarbuttonRestart" Label="Restart level" Icon="Redo"  Click="AppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="appbarbuttonBackToGamesPage" Label="Games Page" Icon="Back"  Click="appbarbuttonBackToGamesPage_Click" />
+                <AppBarButton x:Name="appbarbuttonMainMenu" Label="Main Menu" Icon="Home"  Click="appbarbuttonMainMenu_Click" />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <Storyboard x:Name="strybtnNextLevel">
+            <DoubleAnimation Storyboard.TargetName="btnNextLevel" Storyboard.TargetProperty="Opacity" From="0" To="1" Duration="0:0:1"/>
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid Background="{StaticResource GamesAnswer}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Viewbox Grid.Row="4" Grid.Column="4" >
+            <AppBarButton x:Name="btnNextLevel" Icon="Go"  Label="Advance to B5" Foreground="Green" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed" Opacity="0" Style="{StaticResource AppBarButtonNext}" Click="btnNextLevel_Click"/>
+        </Viewbox>
+
+        <Viewbox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
+        <TextBlock Text="Enter the numbers and the letters in the order that they appeared"  />
+        </Viewbox>
+
+        <Viewbox Grid.Row="2" Grid.Column="2">
+            <TextBlock Text="Numbers"  />
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="2">
+            <TextBlock Text="Letters"  />
+        </Viewbox>
+        <Viewbox Grid.Row="2" Grid.Column="3">
+            <TextBox x:Name="tbxUnitsShowing1_Answer" MaxLength="6" InputScope="Number" BorderBrush="LightBlue" TextChanged="tbxUnitsShowing1_Answer_TextChanged" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="3">
+            <TextBox x:Name="tbxLetter1_Answer" MaxLength="3" BorderBrush="LightBlue" TextChanged="tbxLetter1_Answer_TextChanged"  />
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="4">
+            <TextBox x:Name="tbxLetter2_Answer" MaxLength="3" BorderBrush="LightBlue" TextChanged="tbxLetter2_Answer_TextChanged"  />
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="5">
+            <TextBox x:Name="tbxLetter3_Answer" MaxLength="3" BorderBrush="LightBlue" TextChanged="tbxLetter3_Answer_TextChanged" />
+        </Viewbox>
+
+        <Viewbox Grid.Row="3" Grid.Column="6">
+            <TextBox x:Name="tbxLetter4_Answer" MaxLength="3" BorderBrush="LightBlue" />
+        </Viewbox>
+
+        <ScrollViewer Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="2">
+            <TextBlock x:Name ="tbkResult"   VerticalAlignment="Center" HorizontalAlignment="Left" />
+        </ScrollViewer>
+
+        <Button x:Name="btnCheck" Grid.Row="4" Grid.Column="3" Click="btnCheck_Click" Style="{ThemeResource styleReadyToAnswer}">
+            <Viewbox>
+                <TextBlock Text="Submit"/>
+            </Viewbox>
+        </Button>
+
+
+    </Grid>
+</Page>
